@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#090f13">
+<meta name="description" content="Echo Chamber: The Drowned Choir. An atmospheric 2.5D horror prologue set in a flooded opera city. Sound reveals the way. Something else is listening.">
+<meta property="og:title" content="Echo Chamber — The Drowned Choir"><meta property="og:description" content="Three lost voices. One unfinished song. Play the original atmospheric horror prologue."><meta property="og:image" content="https://echo-chamber.tammineedisriramkart.chatgpt.site/assets/orison-keyart.webp">
+<title>Echo Chamber — The Drowned Choir</title><link rel="icon" href="./favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="./style.css?v=4.0.0">
+</head>
+<body>
+<main id="game">
+ <div id="viewport" aria-label="Explore the flooded opera city of Saint Orison"></div><div id="film" aria-hidden="true"></div><div id="transition" aria-hidden="true"></div>
+ <header id="hud" class="hidden">
+  <div class="vitals"><div class="hud-label">MARA <span id="difficulty-label">· THE RESTORER</span></div><div class="stamina-line" aria-label="Stamina"><i id="stamina"></i></div><div id="state-label">Walk softly.</div></div>
+  <div class="location"><span id="chapter">SAINT ORISON</span><h1 id="room-name">The Last Platform</h1><p id="room-subtitle">Before the last tide</p></div>
+  <div class="mission"><span class="hud-label">THE LOST VOICES</span><div id="cards"><i data-key="cryo" title="The Cloister voice">I</i><i data-key="archive" title="The Archive voice">II</i><i data-key="containment" title="The Choir voice">III</i></div><span id="card-status">Three recordings. One way home.</span></div>
+ </header>
+ <div id="objective" class="hidden" role="status"></div><div id="audio-caption" class="hidden" role="status" aria-live="polite"></div>
+ <div id="listening-panel" class="hidden"><span>LISTENING</span><p id="listening-hint"></p></div>
+ <div id="breath-panel" class="hidden"><span id="breath-title">BREATH</span><div><i id="breath-fill"></i></div><small id="breath-hint">Hold Ctrl / C to stay silent</small></div>
+ <div id="purge-panel" class="hidden"><span>THE FINAL REFRAIN</span><b id="purge-time">24</b><div><i id="purge-fill"></i></div></div>
+ <div id="threat" class="hidden" role="status"><i></i><span>It heard you.</span></div>
+ <section id="bottom-hud" class="hidden">
+  <div class="tools">
+   <button id="pulse-btn" class="tool selected" title="Sound the echo-lantern"><span class="tool-symbol"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M12 11h8l3 15H9l3-15Zm1-1V7a3 3 0 0 1 6 0v3M16 15v7M5 13 2 11m25 2 3-2M5 21l-3 2m25-2 3 2"/></svg></span><b id="pulse-ready">LANTERN</b><kbd data-binding="pulse">SPACE</kbd></button>
+   <button id="throw-btn" class="tool" title="Throw a glass decoy"><span class="tool-symbol"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="m14 4 5 2-3 7 5 10-3 5-10-4-1-5 7-7 2-7M11 17l9 4"/></svg></span><b id="bottle-count">4 DECOYS</b><kbd data-binding="throw">F</kbd></button>
+   <button id="radio-btn" class="tool" title="Wind the distant gramophone"><span class="tool-symbol"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="m6 5 19 5-9 8-4-4-6-9Zm9 11v7H6v5h20v-5H15M26 23v-4h3"/></svg></span><b id="radio-count">3 WINDS</b><kbd data-binding="radio">R</kbd></button>
+   <button id="listen-btn" class="tool" title="Hold to listen"><span class="tool-symbol"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M10 10c0-9 17-9 17 2 0 5-6 6-7 10-1 7-9 7-10 1m6-13c4-2 7 3 3 6l-3 4M4 9v11M1 12v5"/></svg></span><b>LISTEN</b><kbd data-binding="listen">V</kbd></button>
+  </div>
+  <div class="resonance"><span>THE ECHO-LANTERN</span><canvas id="oscilloscope" width="440" height="64" aria-label="Live audio waveform"></canvas><div class="resonance-track"><i id="resonance-fill"></i></div><small id="resonance-caption">SOMETHING IS LISTENING</small></div>
+  <div class="utility"><button id="journal-btn"><span class="key-label" data-binding="journal">J</span> <span>VOICE JOURNAL</span></button><button id="map-btn">TAB <span>CITY MAP</span></button><button id="pause-btn">ESC <span>PAUSE</span></button></div>
+ </section>
+ <div id="interaction" class="hidden"><kbd data-binding="interact">E</kbd><span>Open door</span></div><div id="toast" role="status"></div>
+ <div id="memory-caption" class="hidden"><span id="memory-speaker"></span><p id="memory-line"></p><small>RECOVERED RECORDING · <b data-binding="journal">J</b> TO READ</small></div>
+ <div id="room-flash"><span>SAINT ORISON</span><h2>The Last Platform</h2><i></i></div><div id="save-indicator" class="hidden" role="status">JOURNEY SAVED</div>
+ <section id="title-screen" class="screen">
+  <div class="title-content"><span class="eyebrow">AN ATMOSPHERIC HORROR PROLOGUE</span><h1>Echo<br>Chamber</h1><h2>The Drowned Choir</h2><div class="title-rule"></div><p>The city drowned.<br>The singing didn’t.</p>
+   <button id="start-btn" class="menu-button" disabled><span>Begin a new journey</span><b>→</b></button>
+   <button id="continue-title-btn" class="menu-button hidden"><span>Continue your journey</span><b>→</b></button>
+   <div class="title-links"><button id="title-settings-btn" class="text-button">SETTINGS</button><a href="./credits.html" target="_blank" rel="noopener" class="text-button">CREDITS</a></div>
+  </div><div class="title-bottom"><span id="loading-status">Raising the curtain…</span><button id="sound-btn">SOUND ON</button><span>HEADPHONES RECOMMENDED · PLAYABLE PROLOGUE</span></div>
+ </section>
+ <section id="prologue-screen" class="screen menu-screen hidden">
+  <div class="prologue-content"><span class="eyebrow">SAINT ORISON · THE NINETEENTH NIGHT</span><h2>He was gone.<br><em>Then the recording arrived.</em></h2><blockquote>“If the bells stop, Mara, keep walking.<br>I will know your footsteps.”</blockquote><p>Your brother’s voice. A date three days after the flood.<br>Somewhere beneath the opera house, the wax is still warm.</p><button id="follow-voice-btn" class="menu-button"><span>Follow his voice</span><b>→</b></button><p class="intro-controls">Move with WASD / arrows. Sound the lantern to see.<br>Hold the listen key to hear the Cantor before it hears you.</p><button id="prologue-back-btn" class="text-button">RETURN</button></div>
+ </section>
+ <section id="pause-screen" class="screen menu-screen hidden">
+  <div class="menu-card pause-card"><span class="eyebrow">THE DROWNED CHOIR</span><h2>A moment of silence.</h2><div class="settings-columns"><div class="settings">
+   <label>Visibility <input id="brightness-setting" type="range" min="0.7" max="1.7" step="0.05" value="1.1"><output id="brightness-value">110%</output></label>
+   <label>Sound <input id="volume-setting" type="range" min="0" max="1" step="0.05" value="0.7"><output id="volume-value">70%</output></label>
+   <label>Music <input id="music-setting" type="range" min="0" max="1" step="0.05" value="0.35"><output id="music-value">35%</output></label>
+   <label class="select-setting">New journey <select id="difficulty-setting"><option value="standard">Standard · Listen carefully</option><option value="story">Story · A gentler pursuit</option></select></label>
+   <label class="checkbox-setting"><input id="captions-setting" type="checkbox" checked>Sound captions</label><label class="checkbox-setting"><input id="motion-setting" type="checkbox">Reduced screen effects</label>
+   <button id="quality-btn" class="text-button">GRAPHICS: HIGH</button><button id="fullscreen-btn" class="text-button">ENTER FULLSCREEN</button>
+  </div><div class="controls-settings"><h3>Your instruments</h3><p>WASD / arrows move · Ctrl / C crouches<br>Shift runs · Ctrl / C holds breath while hidden</p><div id="binding-controls"></div><button id="reset-controls-btn" class="text-button">RESET CONTROLS</button></div></div>
+   <button id="resume-btn" class="menu-button"><span>Continue</span><b>→</b></button><button id="restart-pause-btn" class="text-button">BEGIN AGAIN</button><a class="text-button" href="./credits.html" target="_blank" rel="noopener">ART &amp; SOUND CREDITS</a>
+  </div>
+ </section>
+ <section id="map-screen" class="screen menu-screen hidden"><div class="map-card"><span class="eyebrow">THE FLOODED CITY</span><h2>Saint Orison</h2><p>Three lost voices turn the ferry bell.</p><div id="map-diagram"><svg viewBox="0 0 660 230" aria-label="Connected city map"><path d="M80 130H560M300 130V37" fill="none" stroke="#615d4a" stroke-width="2"/><g id="map-nodes"></g></svg></div><div id="map-rooms"></div><button id="close-map" class="text-button">TAB / CLOSE MAP</button></div></section>
+ <section id="journal-screen" class="screen menu-screen hidden"><div class="journal-card"><span class="eyebrow">THE VOICE JOURNAL</span><h2>The things we keep.</h2><p class="journal-intro">I came for my brother. The city had other names for me to learn.</p><div id="journal-entries"></div><button id="close-journal" class="text-button">CLOSE JOURNAL</button></div></section>
+ <section id="ending-choice-screen" class="screen menu-screen hidden"><div class="ending-choice-card"><span class="eyebrow">THE LAST NOTE</span><h2>The ferry is waiting.</h2><p>One voice remains in the mechanism.<br>You can take Ivo’s last words home.<br>Or let them finish the song for everyone.</p><div class="ending-options"><button id="carry-ending-btn"><span>I</span><b>Carry his voice.</b><small>Keep the cylinder. Leave the city.</small></button><button id="release-ending-btn"><span>II</span><b>Free the Choir.</b><small>Spend his voice. Let the others go.</small></button></div></div></section>
+ <section id="end-screen" class="screen menu-screen hidden"><div class="menu-card end-card"><span class="eyebrow" id="end-eyebrow">THE SONG GOES ON</span><h2 id="end-title">The silence returns.</h2><p id="end-copy">The Cantor found your echo.</p><p id="end-last-line"></p><div class="end-stats"><span><b id="end-time">00:00</b>TIME BELOW</span><span><b id="end-cards">0 / 3</b>LOST VOICES</span><span><b id="end-pulses">0</b>ECHOES</span></div><button id="checkpoint-btn" class="menu-button hidden"><span>Retry from the ferry gate</span><b>→</b></button><button id="restart-btn" class="menu-button"><span>Begin another journey</span><b>→</b></button><span class="prologue-end-note">ECHO CHAMBER · THE DROWNED CHOIR · END OF PROLOGUE</span></div></section>
+ <div id="mobile-controls" class="hidden"><div class="move-pad"><button data-move="up" aria-label="Move back">↑</button><button data-move="left" aria-label="Move left">←</button><button data-move="down" aria-label="Move forward">↓</button><button data-move="right" aria-label="Move right">→</button></div><div class="touch-modifiers"><button id="touch-crouch">C<br><small>CROUCH / BREATH</small></button><button id="touch-sprint">⇧<br><small>RUN</small></button></div><button id="touch-interact">E<br><small>INTERACT</small></button></div>
+ <div id="help-line">WASD MOVE · CTRL CROUCH / HOLD BREATH · SHIFT RUN · HOLD V LISTEN · E INTERACT</div>
+</main><script type="module" src="./game.js?v=4.0.0"></script>
+</body></html>
